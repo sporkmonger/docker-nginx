@@ -2,6 +2,7 @@ FROM quay.io/sporkmonger/confd:latest
 MAINTAINER Bob Aman <bob@sporkmonger.com>
 
 # Install Nginx
+RUN apt-get update
 RUN apt-get install -y --force-yes software-properties-common
 RUN add-apt-repository ppa:nginx/stable
 RUN apt-get update
