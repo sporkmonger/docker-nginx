@@ -4,8 +4,8 @@
 set -eo pipefail
 
 export ETCD_PORT=${ETCD_PORT:-4001}
-export HOST_IP=${HOST_IP:-10.10.10.102}
-export ETCD=$HOST_IP:4001
+export HOST_IP=`/sbin/ip route|awk '/default/ { print $3 }'`
+export ETCD=$HOST_IP:$ETCD_PORT
 
 echo "[nginx] booting container. ETCD: $ETCD"
 
