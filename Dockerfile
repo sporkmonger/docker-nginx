@@ -17,7 +17,7 @@ RUN rm -f /etc/nginx/sites-enabled/default
 
 # Add boot script
 COPY ./start /opt/bin/start
-RUN chmod +x /opt/bin/start
+RUN chmod a+x /opt/bin/confd && chmod a+x /opt/bin/start
 
 # Run the boot script
 CMD /opt/bin/start
