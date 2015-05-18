@@ -7,6 +7,17 @@ upstream app {
 server {
   server_name _;
 
+  log_format keyvalue '$remote_addr – $remote_user [$time_iso8601] "$request" '
+                      'status=$status '
+                      'forwarded_for="$http_x_forwarded_for" '
+                      'user_agent="$http_user_agent" '
+                      'referer="$http_referer" '
+                      'bytes_sent=$body_bytes_sent '
+                      'req_time=$request_time '
+                      'server=nginx';
+  access_log /var/log/nginx/access.log keyvalue;
+  error_log /var/log/nginx/error.log error;
+
   location / {
     proxy_pass http://app;
     proxy_redirect off;
