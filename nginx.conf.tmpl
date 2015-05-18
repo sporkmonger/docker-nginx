@@ -1,7 +1,7 @@
 upstream app {
-  {{ range $server := .app_server }}
-  server {{ $server.Value }};
-  {{ end }}
+  {{ $data := json (getv "/registry/services/specs/default/app-server") }}
+  {{ $app_server := $data.spec.portalIP }}
+  server {{ $app_server }};
 }
 
 server {
