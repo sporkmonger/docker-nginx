@@ -1,9 +1,10 @@
-upstream app {
-  {{ $data := json (getv "/registry/services/specs/default/app-server") }}
-  {{ $app_server_ip := $data.spec.portalIP }}
-  {{ $app_server_port := (index $data.ports 0).port }}
-  server {{ $app_server_ip }}:{{ $app_server_port }};
+{{ $data := json (getv "/registry/services/specs/default/app-server") }}
+{{ range $data.spec.ports }}
+upstream app{{ .name }} {
+  server {{ $data.spec.portalIP }}:{{ .port }};
 }
+
+{{ end }}
 
 server {
   server_name _;
