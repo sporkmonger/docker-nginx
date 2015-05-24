@@ -16,6 +16,9 @@ RUN ln -s /tmp /var/lib/nginx && mkdir -p /var/log/nginx
 # Remove default site
 RUN rm -f /etc/nginx/sites-enabled/default
 
+# Save time by causing this to fail if broken
+RUN /usr/sbin/nginx -t -c /etc/nginx/nginx.conf
+
 # Add boot script
 COPY ./start /opt/bin/start
 RUN chmod a+x /opt/bin/confd && chmod a+x /opt/bin/start
