@@ -10,6 +10,9 @@ COPY ./nginx.toml /etc/confd/conf.d/nginx.toml
 COPY ./app.conf.tmpl /etc/confd/templates/app.conf.tmpl
 COPY ./app.toml /etc/confd/conf.d/app.toml
 
+# Make sure the log directory exists
+RUN mkdir -p /var/log/nginx
+
 # Remove default site
 RUN rm -f /etc/nginx/sites-enabled/default
 
