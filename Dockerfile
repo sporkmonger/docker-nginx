@@ -2,7 +2,7 @@ FROM quay.io/sporkmonger/confd:latest
 MAINTAINER Bob Aman <bob@sporkmonger.com>
 
 # Install Nginx
-RUN opkg-install nginx
+RUN apk add --update nginx && rm -rf /var/cache/apk/*
 
 # Add confd files
 COPY ./nginx.conf.tmpl /etc/confd/templates/nginx.conf.tmpl
@@ -11,7 +11,7 @@ COPY ./app.conf.tmpl /etc/confd/templates/app.conf.tmpl
 COPY ./app.toml /etc/confd/conf.d/app.toml
 
 # Wire up directories, since everything just routes to /tmp
-RUN ln -s /tmp /var/lib/nginx && mkdir -p /var/log/nginx
+RUN mkdir -p /tmp/nginx && mkdir -p /var/log/nginx
 
 # Remove default site
 RUN rm -f /etc/nginx/sites-enabled/default
