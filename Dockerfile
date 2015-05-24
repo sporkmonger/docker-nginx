@@ -11,7 +11,8 @@ COPY ./app.conf.tmpl /etc/confd/templates/app.conf.tmpl
 COPY ./app.toml /etc/confd/conf.d/app.toml
 
 # Wire up directories, since everything just routes to /tmp
-RUN mkdir -p /tmp/nginx && mkdir -p /var/log/nginx
+RUN mkdir -p /tmp/nginx && mkdir -p /var/log/nginx && \
+  mkdir -p /etc/nginx/sites-enabled && mkdir -p /etc/nginx/sites-available
 
 # Remove default site
 RUN rm -f /etc/nginx/sites-enabled/default
