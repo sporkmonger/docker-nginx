@@ -24,5 +24,7 @@ RUN /usr/sbin/nginx -t -c /etc/nginx/nginx.conf
 COPY ./start /opt/bin/start
 RUN chmod a+x /opt/bin/confd && chmod a+x /opt/bin/start
 
+EXPOSE 80 443
+
 # Run the boot script
 CMD /opt/bin/start
